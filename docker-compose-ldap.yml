@@ -1,0 +1,44 @@
+version: '3'
+services:
+
+  openldap:
+    env_file: .env
+    image: osixia/openldap:latest
+    restart: always
+    container_name: openldap
+    environment:
+      TZ: Asia/Seoul
+      LDAP_ORGANISATION: "${LDAP_ORGANISATION}"
+      LDAP_DOMAIN: "${LDAP_DOMAIN}"
+      LDAP_ADMIN_PASSWORD: "${LDAP_ADMIN_PASSWORD}"
+    volumes:
+      - ./data/slapd/config:/etc/ldap/slapd.d
+      - ./data/slapd/database:/var/lib/ldap
+      - ./data/slapd/ldifs:/container/service/slapd/assets/custome
+    ports:
+      - 389:389
+      - 636:636
+    networks:
+      - webapps_bridge
+
+  phpldapadmin:
+    image: osixia/phpldapadmin:latest
+    restart: always
+    container_name: phpldapadmin
+    environment:
+      TZ: Asia/Seoul
+      PHPLDAPADMIN_LDAP_HOSTS: "openldap"
+      PHPLDAPADMIN_HTTPS: "false"
+    #volumes:
+    #  - ./pla/config:/container/service/phpldapadmin/assets/config
+    #  - ./pla/phpldapadmin:/var/www/phpldapadmin
+    ports:
+      - 8443:443
+    links:
+      - "openldap:openldap"
+    networks:
+      - webapps_bridge
+
+networks:
+    webapps_bridge:
+        driver: bridge

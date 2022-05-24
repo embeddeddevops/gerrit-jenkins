@@ -1,0 +1,62 @@
+# admin, Groups, 4wxyz.com
+dn: cn=admin,ou=Groups,dc=4wxyz,dc=com
+cn: admin
+objectClass: posixGroup
+objectClass: top
+gidNumber: 1200
+description: Administrator Team
+#memberUid: 1201
+
+# secu, Groups, 4wxyz.com
+dn: cn=secu,ou=Groups,dc=4wxyz,dc=com
+cn: secu
+objectClass: posixGroup
+objectClass: top
+gidNumber: 1300
+description: Security Team
+#memberUid: 1301
+
+# infra, Groups, 4wxyz.com
+dn: cn=infra,ou=Groups,dc=4wxyz,dc=com
+cn: infra
+objectClass: posixGroup
+objectClass: top
+gidNumber: 1500
+description: Infrastructure Team
+#memberUid: 1501
+
+# dev, Groups, 4wxyz.com
+dn: cn=dev,ou=Groups,dc=4wxyz,dc=com
+cn: dev
+objectClass: posixGroup
+objectClass: top
+gidNumber: 1600
+description: Development Team
+#memberUid: 1601
+
+# plan, Groups, 4wxyz.com
+dn: cn=plan,ou=Groups,dc=4wxyz,dc=com
+cn: plan
+objectClass: posixGroup
+objectClass: top
+gidNumber: 1700
+description: Planning Team
+#memberUid: 1701
+
+# design, Groups, 4wxyz.com
+dn: cn=design,ou=Groups,dc=4wxyz,dc=com
+cn: design
+objectClass: posixGroup
+objectClass: top
+gidNumber: 1800
+description: Design Team
+#memberUid: 1801
+
+# publisher, Groups, 4wxyz.com
+dn: cn=publisher,ou=Groups,dc=4wxyz,dc=com
+cn: publisher 
+objectClass: posixGroup
+objectClass: top
+gidNumber: 1900
+description: Publisher Team
+#memberUid: 1901

@@ -1,0 +1,6 @@
+dn: cn=admin,dc=4wxyz,dc=com
+cn: admin
+roleOccupant: dc=4wxyz,dc=com
+objectClass: organizationalRole
+objectClass: top
+description: LDAP Manager
