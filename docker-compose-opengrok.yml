@@ -14,7 +14,7 @@ services:
       - "8080:8080/tcp"
     environment:
       SYNC_PERIOD_MINUTES: '60'
-    #  INDEXER_OPT: '-H -P -G -R /opengrok/etc/read_only.xml'
+      INDEXER_OPT: '-H -P -G -R /opengrok/etc/read_only.xml'
     # Volumes store your data between container upgrades
     networks:
       - webapps_bridge
