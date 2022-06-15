@@ -30,8 +30,8 @@ services:
       PHPLDAPADMIN_LDAP_HOSTS: "openldap"
       PHPLDAPADMIN_HTTPS: "false"
     volumes:
-      - ./pla/config:/container/service/phpldapadmin/assets/config
-      - ./pla/phpldapadmin:/var/www/phpldapadmin
+      - ./data/pla/config:/container/service/phpldapadmin/assets/config
+      - ./data/pla/phpldapadmin:/var/www/phpldapadmin
     ports:
       - 8443:443
     links:
