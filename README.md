@@ -39,6 +39,11 @@ docker system prune -a
 docker volume prune
 
 # docker compose
+jenkins, gerrit. nginx basic configuration
+-----------
 docker compose -f .\docker-compose.yml up -d
+
+openLdap configuration including phpldapadmin web page
+-----------
 docker compose -f .\docker-compose-ldap.yml up -d
 
