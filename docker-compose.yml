@@ -13,7 +13,6 @@ services:
         ports:
             - "50000:50000"
             - "5000:8080"
-            - "2375:2375"
         networks:
             - webapps_bridge
     gerrit:
@@ -24,7 +23,7 @@ services:
             - ./data/gerrit/etc:/var/gerrit/etc
             - ./data/gerrit/git:/var/gerrit/git
             - ./data/gerrit/index:/var/gerrit/index
-            - /data/gerrit/cache:/var/gerrit/cache
+            - ./data/gerrit/cache:/var/gerrit/cache
             - ./data/gerrit/plugins:/var/gerrit/plugins
         environment:
             - CANONICAL_WEB_URL=http://gerrit2.doosanrobotics.com
