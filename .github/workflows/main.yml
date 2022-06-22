@@ -7,3 +7,4 @@ jobs:
       - uses: actions/checkout@v2
       - name: Build the stack
         run: docker-compose -f docker-compose-ldap.yml up -d
+        run: docker-compose -f docker-compose.yml up -d
