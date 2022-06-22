@@ -6,11 +6,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Build the stack
-        run: docker-compose -f docker-compose-ldap.yml up -d
-             docker-compose -f docker-compose.yml up -d
-  checking_gerrit_jenkins:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Build the stack
-        run: docker-compose -f docker-compose.yml up -d
+        run: docker-compose -f docker-compose-main.yml up -d
+
+
