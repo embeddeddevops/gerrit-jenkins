@@ -1,0 +1,90 @@
+version: '3'
+services:
+  openldap:
+    env_file: .env
+    image: osixia/openldap:latest
+    restart: always
+    container_name: openldap
+    environment:
+      TZ: Asia/Seoul
+      LDAP_ORGANISATION: "${LDAP_ORGANISATION}"
+      LDAP_DOMAIN: "${LDAP_DOMAIN}"
+      LDAP_ADMIN_PASSWORD: "${LDAP_ADMIN_PASSWORD}"
+    volumes:
+      - ./data/slapd/config:/etc/ldap/slapd.d
+      - ./data/slapd/database:/var/lib/ldap
+      - ./data/slapd/ldifs:/container/service/slapd/assets/custome
+    ports:
+      - 389:389
+      - 636:636
+    networks:
+      - webapps_bridge
+
+  phpldapadmin:
+    image: osixia/phpldapadmin:latest
+    restart: always
+    container_name: phpldapadmin
+    environment:
+      TZ: Asia/Seoul
+      PHPLDAPADMIN_LDAP_HOSTS: "openldap"
+      PHPLDAPADMIN_HTTPS: "false"
+    volumes:
+      - ./data/pla/config:/container/service/phpldapadmin/assets/config
+      - ./data/pla/phpldapadmin:/var/www/phpldapadmin
+    ports:
+      - 8443:443
+    links:
+      - "openldap:openldap"
+    networks:
+      - webapps_bridge
+    jenkins:
+        #image: jenkins/jenkins:lts
+        build: ./jenkins
+        container_name: jenkins
+        restart: unless-stopped
+        volumes:
+            - ./data/jenkins/:/var/jenkins_home
+        environment:
+            - JAVA_OPTS="-Duser.timezone=Asia/Seoul"
+        ports:
+            - "50000:50000"
+            - "5000:8080"
+        networks:
+            - webapps_bridge
+    gerrit:
+        build: ./gerrit
+        container_name: gerrit
+        restart: unless-stopped
+        volumes:
+            - ./data/gerrit/etc:/var/gerrit/etc
+            - ./data/gerrit/git:/var/gerrit/git
+            - ./data/gerrit/index:/var/gerrit/index
+            - ./data/gerrit/cache:/var/gerrit/cache
+            - ./data/gerrit/plugins:/var/gerrit/plugins
+        environment:
+            - CANONICAL_WEB_URL=http://gerrit2.doosanrobotics.com
+        ports:
+            - "29418:29418"
+        networks:
+            - webapps_bridge
+    nginx:
+        build: ./nginx
+        container_name: nginx
+        restart: unless-stopped
+        volumes:
+            - ./data/nginx/conf.d:/etc/nginx/conf.d
+            - ./data/nginx/log:/var/log/nginx
+            - ./data/nginx/docker-entrypoint.d:/docker-entrypoint.d
+        ports:
+            - "80:80"
+            - "443:443"
+        networks:
+            - webapps_bridge
+        depends_on:
+            - jenkins
+            - gerrit
+            - phpldapadmin
+            - openldap
+networks:
+    webapps_bridge:
+        driver: bridge
