@@ -1,5 +1,5 @@
 # docker
-[![Actions Status](https://github.com/embeddeddevops/docker/workflows/Continuous%20integration/badge.svg)](https://github.com/embeddeddevops/compose/actions)
+[![Actions Status](https://github.com/embeddeddevops/docker/workflows/docker-compose-actions-workflow/badge.svg)](https://github.com/embeddeddevops/compose/actions)
 
 ![Docker Compose](logo.png?raw=true "Docker Compose Logo")
 
